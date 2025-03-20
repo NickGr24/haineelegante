@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Magazin de Haine{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100 font-sans antialiased">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed top-0 left-0 w-full z-50 animate-fade-in">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <!-- Логотип -->
+            <a href="{% url 'home' %}" class="flex items-center">
+                <img class="w-48 md:w-56 transition-transform transform hover:scale-105" src="{% static 'img/logo.jpg' %}" alt="Logo">
+            </a>
+
+            <!-- Меню -->
+            <div class="hidden md:flex space-x-8 text-lg">
+                <a href="{% url 'home' %}" class="nav-link"><i class="fas fa-home"></i> Acasă</a>
+                <a href="#categorii" class="nav-link"><i class="fas fa-th"></i> Categorii</a>
+                <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contacte</a>
+            </div>
+
+            <!-- Кнопка мобильного меню -->
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Мобильное меню -->
+        <div id="mobile-menu" class="hidden md:hidden flex flex-col items-center bg-white py-4 animate-slide-down">
+            <a href="{% url 'home' %}" class="py-2 text-gray-700 hover:text-purple-900"><i class="fas fa-home"></i> Acasă</a>
+            <a href="#categorii" class="py-2 text-gray-700 hover:text-purple-900"><i class="fas fa-th"></i> Categorii</a>
+            <a href="#contact" class="py-2 text-gray-700 hover:text-purple-900"><i class="fas fa-envelope"></i> Contacte</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="flex-grow mt-24">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 text-gray-400 animate-fade-in">
+        <div class="container  px-4 flex justify-around text-center md:text-left flex justify-between flex-col">
+
+            <!-- Контакты -->
+            <div id="contact" class="text-center">
+                <h3 class="text-lg font-semibold text-white">Contacte</h3>
+                <p><i class="fas fa-phone-alt text-pink-500"></i> Telefon: +37360227022</p>
+                <p><i class="fas fa-envelope text-pink-500"></i> Email: haineelegante@mail.ru</p>
+            </div>
+
+            <!-- Копирайт -->
+            <div class="text-sm text-center md:text-right">
+                <p>&copy; 2025 Haine Elegante.</p>
+                <p>Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS для мобильного меню -->
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function() {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+    </script>
+
+    <!-- CSS-анимация -->
+    <style>
+        /* Навбар: анимация появления */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Мобильное меню: плавное появление */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-down {
+            animation: slideDown 0.3s ease-in-out;
+        }
+
+        /* Стили ссылок */
+        .nav-link {
+            position: relative;
+            color: #4a4a4a;
+            font-weight: 600;
+            transition: color 0.3s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #9333ea;
+        }
+        .nav-link::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 2px;
+            background: lightskyblue;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+
+</body>
+</html>

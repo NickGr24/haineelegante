@@ -1,0 +1,37 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.title }} - Haine Elegante{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Изображение товара -->
+        <div>
+            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="w-full h-auto rounded-lg shadow-lg">
+        </div>
+
+        <!-- Информация о товаре -->
+        <div>
+            <h1 class="text-4xl font-bold text-gray-800">{{ product.title }}</h1>
+            <p class="text-gray-500 text-lg mt-2">Categorie: <span class="text-pink-500">{{ product.category.name }}</span></p>
+            <p class="text-gray-500 text-lg">Brand: <span class="text-pink-500">{{ product.brand.name }}</span></p>
+            
+            <!-- Цена -->
+            {% if product.discount %}
+                <p class="text-3xl font-bold text-gray-800 mt-4">
+                    <span class="line-through text-gray-500">{{ product.price }} MDL</span>
+                    <span class="text-pink-500 ml-2">{{ product.final_price }} MDL</span>
+                </p>
+                <p class="text-red-500 font-semibold text-lg">Reducere: {{ product.discount }}%</p>
+            {% else %}
+                <p class="text-3xl font-bold text-gray-800 mt-4">{{ product.price }} MDL</p>
+            {% endif %}
+
+            <!-- Доступные размеры -->
+            <p class="text-gray-600 mt-4">Mărimi disponibile: <span class="text-gray-800 font-semibold">{{ product.sizes }}</span></p>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
