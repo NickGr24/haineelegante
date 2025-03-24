@@ -25,8 +25,9 @@ class Brand(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name="Denumirea produsului")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Categorie")
+    description = models.TextField(verbose_name='Descriere', null=True, blank=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="Brand")
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Preț (RON)")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Preț (MDL)")
     image = models.ImageField(upload_to='products/', verbose_name="Imagine")
     sizes = models.CharField(max_length=100, verbose_name="Mărimi disponibile", help_text="Exemplu: 42, 44, 46")
     discount = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Reducere (%)")
