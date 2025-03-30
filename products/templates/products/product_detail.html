@@ -4,13 +4,31 @@
 {% block title %}{{ product.title }} - Haine Elegante{% endblock %}
 
 {% block content %}
-<section class="container mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Изображение товара -->
-        <div>
-            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="w-full h-auto rounded-lg shadow-lg">
-        </div>
 
+<section class="container mx-auto px-6 py-12">
+<!-- Галерея товара -->
+<div class="max-w-xl mx-auto w-full">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        {% for img in product.images.all %}
+          <div class="swiper-slide">
+            <img src="{{ img.image.url }}" alt="{{ product.title }}"
+                 class="rounded-lg w-full h-auto object-contain max-h-[500px]" />
+          </div>
+        {% empty %}
+          <div class="swiper-slide">
+            <img src="{{ product.image.url }}" alt="{{ product.title }}"
+                 class="rounded-lg w-full h-auto object-contain max-h-[500px]" />
+          </div>
+        {% endfor %}
+      </div>
+  
+      <!-- Навигация -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
         <!-- Информация о товаре -->
         <div>
             <h1 class="text-4xl font-bold text-gray-800">{{ product.title }}</h1>
@@ -34,4 +52,20 @@
         </div>
     </div>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    loop: true,
+    spaceBetween: 20,
+    slidesPerView: 1,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
 {% endblock %}

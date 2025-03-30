@@ -43,3 +43,24 @@ class Product(models.Model):
 
     class Meta:
         verbose_name_plural = "Produse"
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='products/gallery/')
+
+    def __str__(self):
+        return f"Imagine pentru {self.product.title}"
+
+class SliderImage(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Titlu (opțional)", blank=True)
+    image = models.ImageField(upload_to='slider/', verbose_name="Imagine")
+    active = models.BooleanField(default=True, verbose_name="Activ")
+    order = models.PositiveIntegerField(default=0, verbose_name="Ordine")
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Imagine slider"
+        verbose_name_plural = "Imagini slider"
+
+    def __str__(self):
+        return self.title or f"Imagine #{self.pk}"

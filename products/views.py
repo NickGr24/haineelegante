@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Category, Brand
+from .models import Product, Category, Brand, SliderImage
 
 def index(request):
     categories = Category.objects.all()
@@ -9,12 +9,14 @@ def index(request):
     first_letters = sorted(set(brand.name[0].upper() for brand in brands if brand.name))
 
     products = Product.objects.all()
+    slides = SliderImage.objects.all()
     
     return render(request, "products/index.html", {
         "categories": categories,
         "brands": brands,
         "products": products,
-        "first_letters": first_letters
+        "first_letters": first_letters, 
+        'slides': slides,
     })
 
 def product_detail(request, product_id):

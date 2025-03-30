@@ -39,7 +39,6 @@ BRANDS = [
 ]
 
 class Command(BaseCommand):
-    help = "Добавить все бренды в базу данных"
 
     def handle(self, *args, **kwargs):
         for brand in BRANDS:

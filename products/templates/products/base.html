@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Magazin de Haine{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100 font-sans antialiased">
@@ -20,6 +21,7 @@
 
             <!-- Меню -->
             <div class="hidden md:flex space-x-8 text-lg">
+                    
                 <a href="{% url 'home' %}" class="nav-link"><i class="fas fa-home"></i> Acasă</a>
                 <a href="#categorii" class="nav-link"><i class="fas fa-th"></i> Categorii</a>
                 <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contacte</a>
